@@ -13,4 +13,9 @@ student_urls.each do |url|
   student_scrape = StudentScraper.new("http://students.flatironschool.com/#{url}")
   student_instance = student_scrape.scrape
   puts "Just scraped #{student_instance.name}..."
+  
+  
+
+
+  
 end
