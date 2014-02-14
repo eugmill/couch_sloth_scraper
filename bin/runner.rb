@@ -1,8 +1,8 @@
 require 'pry'
 require_relative "../config/environment"
 
-# DB = SQLite3::Database.new "students.db"
-# Movie.create_table
+DB = SQLite3::Database.new "students.db"
+Student.create_table
 
 # # 1. Open up http://students.flatironschool.com/ and find each student URL
 # # 2. Pass that student url to an instance of StudentScraper
@@ -11,7 +11,8 @@ index_doc = Nokogiri::HTML(open("http://students.flatironschool.com/"))
 student_urls = index_doc.search("div.big-comment h3 a").collect{|e| e.attribute("href").value}
 student_urls.each do |url|
   student_scrape = StudentScraper.new("http://students.flatironschool.com/#{url}")
-  student_instance = student_scrape.scrape
+  student_instance = student_scrape.create_instance
+  
   puts "Just scraped #{student_instance.name}..."
   
   
