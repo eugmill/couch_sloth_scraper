@@ -1,16 +1,21 @@
+require 'pry'
 require_relative "../config/environment"
 
 # DB = SQLite3::Database.new "students.db"
 # Movie.create_table
 
-# # 1. Open up http://www.imdb.com/movies-coming-soon/ and find each movie URL
-# # 2. Pass that movie url to an instane of MovieScrapper
-# # 3. Tell that instance to scrape itself and return a movie
-# index_doc = Nokogiri::HTML(open("http://www.imdb.com/movies-coming-soon/"))
-# movie_urls = index_doc.search("h4[itemprop=name] a").collect{|e| e.attribute("href").value}
+# # 1. Open up http://students.flatironschool.com/ and find each student URL
+# # 2. Pass that student url to an instance of StudentScraper
+# # 3. Tell that instance to scrape itself and return student info (name, tagline, etc.)
+index_doc = Nokogiri::HTML(open("http://students.flatironschool.com/"))
+student_urls = index_doc.search("div.big-comment h3 a").collect{|e| e.attribute("href").value}
+student_urls.each do |url|
+  student_scrape = StudentScraper.new("http://students.flatironschool.com/#{url}")
+  student_instance = student_scrape.scrape
+  puts "Just scraped #{student_instance.name}..."
+  
+  
 
-# movie_urls.each do |url|
-#   movie_scrape = MovieScraper.new("http://www.imdb.com#{url}")
-#   movie_instance = movie_scrape.scrape
-#   puts "Just scrapped #{movie_instance.name}..."
-# end
+
+  
+end
