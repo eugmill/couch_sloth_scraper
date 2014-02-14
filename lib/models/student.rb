@@ -1,12 +1,12 @@
-class Movie
+class Student
   attr_accessor :name
 
   def self.create_table
-    DB.execute("CREATE TABLE IF NOT EXISTS movies (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)")
+    DB.execute("CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)")
   end
   
   def save
-    DB.execute("INSERT INTO movies (name) VALUES (:name)", to_h)
+    DB.execute("INSERT INTO students (name) VALUES (:name)", to_h)
     # DB.execute("INSERT INTO movies (name) VALUES (?) WHERE name = ?", name)
   end
 
